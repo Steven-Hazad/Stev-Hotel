@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.ComponentModel.DataAnnotations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ namespace StevHotel.Models
 {
     public class ActivityLog
     {
+        [Key]
         public int LogID { get; set; }
         public string Action { get; set; } = string.Empty;
         public DateTime Timestamp { get; set; } = DateTime.Now;

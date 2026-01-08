@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.ComponentModel.DataAnnotations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ namespace StevHotel.Models
 {
     public class CheckOut
     {
+        [Key]
         public int CheckOutID { get; set; }
         public DateTime CheckOutTime { get; set; } = DateTime.Now;
         public string? Notes { get; set; }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.ComponentModel.DataAnnotations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ namespace StevHotel.Models
 {
     public class Room
     {
+        [Key]
         public int RoomID { get; set; }
         public string RoomNumber { get; set; } = string.Empty;
         public int? Floor { get; set; }
