@@ -9,5 +9,10 @@ namespace StevHotel.Forms
         {
             InitializeComponent();
         }
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            // We'll implement login logic here next
+            lblError.Text = "Login not implemented yet...";
+        }
     }
 }

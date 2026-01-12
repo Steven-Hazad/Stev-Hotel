@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StevHotel.Models;
-using System.Collections.Generic;
-using System.Reflection.Emit;
 
 namespace StevHotel.Data
 {
@@ -11,6 +9,7 @@ namespace StevHotel.Data
         {
         }
 
+        // DbSets
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Room> Rooms { get; set; }
@@ -26,25 +25,17 @@ namespace StevHotel.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Seed Roles
+            base.OnModelCreating(modelBuilder);
+
+            // Seed only Roles (this is safe to do in migrations)
             modelBuilder.Entity<Role>().HasData(
                 new Role { RoleID = 1, RoleName = "Admin" },
                 new Role { RoleID = 2, RoleName = "Receptionist" },
                 new Role { RoleID = 3, RoleName = "Staff" }
             );
 
-            // Seed Admin User (password will be "admin123" hashed later)
-            modelBuilder.Entity<User>().HasData(
-                new User
-                {
-                    UserID = 1,
-                    Username = "admin",
-                    PasswordHash = "", // We'll hash it in code later
-                    FullName = "Administrator",
-                    RoleID = 1,
-                    IsActive = true
-                }
-            );
+            // IMPORTANT: We do NOT seed the User here anymore
+            // We'll handle the admin user in SeedData.cs at runtime
         }
     }
 }
