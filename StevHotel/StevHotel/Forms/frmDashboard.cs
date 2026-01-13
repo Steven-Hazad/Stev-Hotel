@@ -32,8 +32,22 @@ namespace StevHotel.Forms
 
         private void roomListToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var rooslist= new frmRoomList();
+            var rooslist = new frmRoomList();
             rooslist.ShowDialog();
+        }
+
+        private void newReservationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var newRes = new frmNewReservation())
+            {
+                newRes.ShowDialog();
+            }
+        }
+
+        private void reservationListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var resList = new frmReservationList();
+            resList.ShowDialog();
         }
     }
 }

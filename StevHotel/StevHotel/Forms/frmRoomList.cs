@@ -74,32 +74,100 @@ namespace StevHotel.Forms
         // Placeholder for Add/Edit/Delete (we'll implement next)
         private void btnAddRoom_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Add Room form coming soon...");
+            using (var addForm = new frmRoomEdit())
+            {
+                if (addForm.ShowDialog() == DialogResult.OK)
+                {
+                    LoadRooms(); // Refresh grid
+                }
+            }
         }
 
         private void btnEditRoom_Click(object sender, EventArgs e)
         {
             if (dgvRooms.SelectedRows.Count == 0)
             {
-                MessageBox.Show("Select a room first.");
+                MessageBox.Show("Please select a room to edit.");
                 return;
             }
-            MessageBox.Show("Edit form coming soon...");
+
+            int roomId = (int)dgvRooms.SelectedRows[0].Cells["RoomID"].Value;
+            var selectedRoom = _db.Rooms.Find(roomId);
+
+            using (var editForm = new frmRoomEdit(selectedRoom))
+            {
+                if (editForm.ShowDialog() == DialogResult.OK)
+                {
+                    LoadRooms();
+                }
+            }
         }
 
         private void btnDeleteRoom_Click(object sender, EventArgs e)
         {
             if (dgvRooms.SelectedRows.Count == 0)
             {
-                MessageBox.Show("Select a room first.");
+                MessageBox.Show("Please select a room to delete.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            if (MessageBox.Show("Delete this room?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            int roomId = (int)dgvRooms.SelectedRows[0].Cells["RoomID"].Value;
+            string roomNumber = dgvRooms.SelectedRows[0].Cells["RoomNumber"].Value.ToString();
+
+            // Safety check: don't delete if room is occupied/reserved
+            var room = _db.Rooms.Find(roomId);
+            if (room == null)
             {
-                // We'll implement delete logic next round
-                MessageBox.Show("Delete coming soon...");
+                MessageBox.Show("Room not found.");
+                return;
+            }
+
+            if (room.Status == "Occupied" || room.Status == "Reserved")
+            {
+                MessageBox.Show($"Cannot delete room {roomNumber} — it is currently {room.Status.ToLower()}.",
+                                "Cannot Delete", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (MessageBox.Show($"Delete room {roomNumber} ({room.RoomType.TypeName})?\nThis cannot be undone.",
+                                "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                try
+                {
+                    _db.Rooms.Remove(room);
+                    _db.SaveChanges();
+                    MessageBox.Show("Room deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadRooms(); // Refresh grid
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error deleting room: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
+        private void ChangeRoomStatus(string newStatus)
+{
+    if (dgvRooms.SelectedRows.Count == 0)
+    {
+        MessageBox.Show("Select a room first.");
+        return;
+    }
+
+    int roomId = (int)dgvRooms.SelectedRows[0].Cells["RoomID"].Value;
+    var room = _db.Rooms.Find(roomId);
+
+    if (room == null) return;
+
+    room.Status = newStatus;
+    _db.SaveChanges();
+
+    MessageBox.Show($"Room {room.RoomNumber} status updated to {newStatus}.");
+    LoadRooms();
+}
+
+private void btnSetAvailable_Click(object sender, EventArgs e) => ChangeRoomStatus("Available");
+private void btnSetCleaning_Click(object sender, EventArgs e) => ChangeRoomStatus("Cleaning");
+private void btnSetOccupied_Click(object sender, EventArgs e) => ChangeRoomStatus("Occupied");
+private void btnSetReserved_Click(object sender, EventArgs e) => ChangeRoomStatus("Reserved");
     }
 }
