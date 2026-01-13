@@ -24,9 +24,10 @@ namespace StevHotel.Forms
             dtpCheckIn.MinDate = DateTime.Today;
             dtpCheckOut.MinDate = DateTime.Today.AddDays(1);
             dtpCheckIn.Value = DateTime.Today;
-            dtpCheckOut.Value = DateTime.Today.AddDays(3); // default 3 nights
+            dtpCheckOut.Value = DateTime.Today.AddDays(3);
 
-            UpdateNightsAndPrice();
+            lblTotalPrice.Text = "";
+            lblNights.Text = "Nights: 0";
         }
 
         private void btnSearchGuest_Click(object sender, EventArgs e)
@@ -44,7 +45,7 @@ namespace StevHotel.Forms
                     g.FullName.Contains(search) ||
                     g.Phone.Contains(search) ||
                     (g.NationalID != null && g.NationalID.Contains(search)))
-                .Take(20) // limit results
+                .Take(20)
                 .ToList();
 
             dgvGuests.DataSource = guests.Select(g => new
@@ -60,44 +61,40 @@ namespace StevHotel.Forms
                 dgvGuests.Columns["GuestID"].Visible = false;
 
             if (guests.Count == 0)
-            {
-                MessageBox.Show("No guests found. You may need to add a new guest first.");
-            }
+                MessageBox.Show("No guests found. Add new guest first.");
         }
 
         private void dgvGuests_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgvGuests.SelectedRows.Count > 0)
-            {
-                int guestId = (int)dgvGuests.SelectedRows[0].Cells["GuestID"].Value;
-                _selectedGuest = _db.Guests.Find(guestId);
+            if (dgvGuests.SelectedRows.Count == 0)
+                return;
 
-                if (_selectedGuest != null)
-                {
-                    txtGuestSearch.Text = _selectedGuest.FullName + " (" + _selectedGuest.Phone + ")";
-                    UpdateAvailableRooms(); // trigger room search when guest selected
-                }
+            int guestId = (int)dgvGuests.SelectedRows[0].Cells["GuestID"].Value;
+            _selectedGuest = _db.Guests.Find(guestId);
+
+            if (_selectedGuest != null)
+            {
+                txtGuestSearch.Text = $"{_selectedGuest.FullName} ({_selectedGuest.Phone})";
+                UpdateAvailableRooms();
             }
         }
 
         private void dtpCheckIn_ValueChanged(object sender, EventArgs e)
         {
             if (dtpCheckOut.Value <= dtpCheckIn.Value)
-            {
                 dtpCheckOut.Value = dtpCheckIn.Value.AddDays(1);
-            }
-            UpdateNightsAndPrice();
+
             UpdateAvailableRooms();
+            UpdateNightsAndPrice();
         }
 
         private void dtpCheckOut_ValueChanged(object sender, EventArgs e)
         {
             if (dtpCheckOut.Value <= dtpCheckIn.Value)
-            {
                 dtpCheckOut.Value = dtpCheckIn.Value.AddDays(1);
-            }
-            UpdateNightsAndPrice();
+
             UpdateAvailableRooms();
+            UpdateNightsAndPrice();
         }
 
         private void UpdateNightsAndPrice()
@@ -105,26 +102,27 @@ namespace StevHotel.Forms
             int nights = (dtpCheckOut.Value.Date - dtpCheckIn.Value.Date).Days;
             lblNights.Text = $"Nights: {nights}";
 
-            // Price preview only if room selected
-            if (cmbAvailableRooms.SelectedItem != null && cmbAvailableRooms.SelectedValue is int roomTypeId)
-            {
-                var roomType = _db.RoomTypes.Find(roomTypeId);
-                if (roomType != null)
-                {
-                    decimal total = nights * roomType.PricePerNight;
-                    lblTotalPrice.Text = $"Estimated Total: {total:N2} USD";
-                }
-            }
-            else
+            if (cmbAvailableRooms.SelectedItem == null || cmbAvailableRooms.SelectedValue is not int roomId || roomId == 0)
             {
                 lblTotalPrice.Text = "";
+                return;
+            }
+
+            var room = _db.Rooms
+                .Include(r => r.RoomType)
+                .FirstOrDefault(r => r.RoomID == roomId);
+
+            if (room != null)
+            {
+                decimal total = nights * room.RoomType.PricePerNight;
+                lblTotalPrice.Text = $"Estimated Total: {total:N2} USD";
             }
         }
 
         private void UpdateAvailableRooms()
         {
-            cmbAvailableRooms.Items.Clear();
             cmbAvailableRooms.DataSource = null;
+            cmbAvailableRooms.Enabled = false;
 
             if (_selectedGuest == null)
             {
@@ -135,10 +133,10 @@ namespace StevHotel.Forms
             DateTime checkIn = dtpCheckIn.Value.Date;
             DateTime checkOut = dtpCheckOut.Value.Date;
 
-            // Find rooms that are NOT reserved/occupied during the date range
             var bookedRoomIds = _db.Reservations
-                .Where(r => r.Status != "Cancelled" &&
-                            ((r.CheckInDate < checkOut && r.CheckOutDate > checkIn)))
+                .Where(r => r.Status != "Cancelled"
+                    && r.CheckInDate < checkOut
+                    && r.CheckOutDate > checkIn)
                 .Select(r => r.RoomID)
                 .ToList();
 
@@ -148,15 +146,18 @@ namespace StevHotel.Forms
                 .Select(r => new
                 {
                     r.RoomID,
-                    Display = $"{r.RoomNumber} - {r.RoomType.TypeName} (${r.RoomType.PricePerNight:N2}/night)",
-                    r.RoomTypeID,
-                    r.RoomType.PricePerNight
+                    Display = $"{r.RoomNumber} - {r.RoomType.TypeName} (${r.RoomType.PricePerNight:N2}/night)"
                 })
                 .ToList();
 
             if (availableRooms.Count == 0)
             {
-                cmbAvailableRooms.Items.Add("No available rooms for these dates");
+                cmbAvailableRooms.DataSource = new[]
+                {
+                    new { RoomID = 0, Display = "No available rooms for these dates" }
+                };
+                cmbAvailableRooms.DisplayMember = "Display";
+                cmbAvailableRooms.ValueMember = "RoomID";
                 cmbAvailableRooms.Enabled = false;
             }
             else
@@ -165,7 +166,6 @@ namespace StevHotel.Forms
                 cmbAvailableRooms.DisplayMember = "Display";
                 cmbAvailableRooms.ValueMember = "RoomID";
                 cmbAvailableRooms.Enabled = true;
-                UpdateNightsAndPrice();
             }
         }
 
@@ -182,7 +182,7 @@ namespace StevHotel.Forms
                 return;
             }
 
-            if (cmbAvailableRooms.SelectedValue == null || cmbAvailableRooms.SelectedValue is not int roomId)
+            if (cmbAvailableRooms.SelectedValue is not int roomId || roomId == 0)
             {
                 MessageBox.Show("Please select an available room.");
                 return;
@@ -200,7 +200,7 @@ namespace StevHotel.Forms
                 RoomID = roomId,
                 CheckInDate = dtpCheckIn.Value.Date,
                 CheckOutDate = dtpCheckOut.Value.Date,
-                Status = "Pending" // or "Confirmed" depending on your flow
+                Status = "Pending"
             };
 
             try
@@ -208,7 +208,6 @@ namespace StevHotel.Forms
                 _db.Reservations.Add(reservation);
                 _db.SaveChanges();
 
-                // Optional: Update room status to Reserved
                 var room = _db.Rooms.Find(roomId);
                 if (room != null)
                 {
@@ -216,20 +215,20 @@ namespace StevHotel.Forms
                     _db.SaveChanges();
                 }
 
-                MessageBox.Show("Reservation created successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.DialogResult = DialogResult.OK;
-                this.Close();
+                MessageBox.Show("Reservation created successfully!", "Success");
+                DialogResult = DialogResult.OK;
+                Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error creating reservation: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error creating reservation: {ex.Message}");
             }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
+            DialogResult = DialogResult.Cancel;
+            Close();
         }
     }
 }
