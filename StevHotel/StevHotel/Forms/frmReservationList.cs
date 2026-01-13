@@ -191,5 +191,47 @@ namespace StevHotel.Forms
                 }
             }
         }
+        private void btnCheckIn_Click(object sender, EventArgs e)
+        {
+            if (dgvReservations.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Select a reservation to check-in.");
+                return;
+            }
+
+            int resId = (int)dgvReservations.SelectedRows[0].Cells["ReservationID"].Value;
+            string status = dgvReservations.SelectedRows[0].Cells["Status"].Value?.ToString();
+
+            if (status != "Pending" && status != "Confirmed")
+            {
+                MessageBox.Show("Only Pending or Confirmed reservations can be checked in.");
+                return;
+            }
+
+            var reservation = _db.Reservations
+                .Include(r => r.Room)
+                .FirstOrDefault(r => r.ReservationID == resId);
+
+            if (reservation == null)
+            {
+                MessageBox.Show("Reservation not found.");
+                return;
+            }
+
+            // Optional: check if already checked in
+            if (_db.CheckIns.Any(ci => ci.ReservationID == resId))
+            {
+                MessageBox.Show("This reservation is already checked in.");
+                return;
+            }
+
+            using (var checkInForm = new frmCheckIn(reservation))
+            {
+                if (checkInForm.ShowDialog() == DialogResult.OK)
+                {
+                    LoadReservations();
+                }
+            }
+        }
     }
 }
