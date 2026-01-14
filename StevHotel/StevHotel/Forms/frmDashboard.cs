@@ -49,5 +49,11 @@ namespace StevHotel.Forms
             var resList = new frmReservationList();
             resList.ShowDialog();
         }
+
+        private void guestListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var guestList = new frmGuestList();
+            guestList.ShowDialog();
+        }
     }
 }

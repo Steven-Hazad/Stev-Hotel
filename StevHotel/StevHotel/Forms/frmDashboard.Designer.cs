@@ -119,14 +119,14 @@
             // newReservationToolStripMenuItem
             // 
             newReservationToolStripMenuItem.Name = "newReservationToolStripMenuItem";
-            newReservationToolStripMenuItem.Size = new Size(180, 22);
+            newReservationToolStripMenuItem.Size = new Size(162, 22);
             newReservationToolStripMenuItem.Text = "New &Reservation";
             newReservationToolStripMenuItem.Click += newReservationToolStripMenuItem_Click;
             // 
             // reservationListToolStripMenuItem
             // 
             reservationListToolStripMenuItem.Name = "reservationListToolStripMenuItem";
-            reservationListToolStripMenuItem.Size = new Size(180, 22);
+            reservationListToolStripMenuItem.Size = new Size(162, 22);
             reservationListToolStripMenuItem.Text = "Reservation &List";
             reservationListToolStripMenuItem.Click += reservationListToolStripMenuItem_Click;
             // 
@@ -140,8 +140,9 @@
             // guestListToolStripMenuItem
             // 
             guestListToolStripMenuItem.Name = "guestListToolStripMenuItem";
-            guestListToolStripMenuItem.Size = new Size(125, 22);
+            guestListToolStripMenuItem.Size = new Size(180, 22);
             guestListToolStripMenuItem.Text = "Guest &List";
+            guestListToolStripMenuItem.Click += guestListToolStripMenuItem_Click;
             // 
             // billingToolStripMenuItem
             // 
