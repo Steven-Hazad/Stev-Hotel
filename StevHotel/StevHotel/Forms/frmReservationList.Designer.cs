@@ -17,6 +17,7 @@
         {
             this.dgvReservations = new System.Windows.Forms.DataGridView();
             this.btnRefresh = new System.Windows.Forms.Button();
+            this.btnCheckOut = new System.Windows.Forms.Button();
             this.btnNewReservation = new System.Windows.Forms.Button();
             this.btnEditReservation = new System.Windows.Forms.Button();
             this.btnCancelReservation = new System.Windows.Forms.Button();
@@ -26,6 +27,7 @@
             this.lblDateRange = new System.Windows.Forms.Label();
             this.cmbStatusFilter = new System.Windows.Forms.ComboBox();
             this.lblStatusFilter = new System.Windows.Forms.Label();
+
 
             ((System.ComponentModel.ISupportInitialize)(this.dgvReservations)).BeginInit();
             this.SuspendLayout();
@@ -89,6 +91,15 @@
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
 
+
+            // In InitializeComponent()
+            this.btnCheckOut.Location = new System.Drawing.Point(600, 12);
+            this.btnCheckOut.Name = "btnCheckOut";
+            this.btnCheckOut.Size = new System.Drawing.Size(140, 30);
+            this.btnCheckOut.TabIndex = 11;
+            this.btnCheckOut.Text = "Check-Out Selected";
+            this.btnCheckOut.UseVisualStyleBackColor = true;
+            this.btnCheckOut.Click += new System.EventHandler(this.btnCheckOut_Click);
             // =======================
             // Filters Row
             // =======================
@@ -137,6 +148,8 @@
             this.Controls.Add(this.lblDateRange);
             this.Controls.Add(this.dtpFrom);
             this.Controls.Add(this.dtpTo);
+            this.Controls.Add(this.btnCheckOut);
+
             this.Name = "frmReservationList";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Reservations Management";
@@ -149,6 +162,7 @@
 
         private System.Windows.Forms.DataGridView dgvReservations;
         private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.Button btnCheckOut;
         private System.Windows.Forms.Button btnNewReservation;
         private System.Windows.Forms.Button btnEditReservation;
         private System.Windows.Forms.Button btnCancelReservation;

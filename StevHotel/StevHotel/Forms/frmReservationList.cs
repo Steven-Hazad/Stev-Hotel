@@ -233,5 +233,40 @@ namespace StevHotel.Forms
                 }
             }
         }
+        private void btnCheckOut_Click(object sender, EventArgs e)
+        {
+            if (dgvReservations.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Select a reservation to check-out.");
+                return;
+            }
+
+            int resId = (int)dgvReservations.SelectedRows[0].Cells["ReservationID"].Value;
+
+            var checkIn = _db.CheckIns
+                .Include(ci => ci.Reservation)
+                    .ThenInclude(r => r.Room)
+                .FirstOrDefault(ci => ci.ReservationID == resId);
+
+            if (checkIn == null)
+            {
+                MessageBox.Show("No check-in found for this reservation. Cannot check-out.");
+                return;
+            }
+
+            if (_db.CheckOuts.Any(co => co.CheckInID == checkIn.CheckInID))
+            {
+                MessageBox.Show("This reservation is already checked out.");
+                return;
+            }
+
+            using (var checkOutForm = new frmCheckOut(checkIn))
+            {
+                if (checkOutForm.ShowDialog() == DialogResult.OK)
+                {
+                    LoadReservations();
+                }
+            }
+        }
     }
 }
