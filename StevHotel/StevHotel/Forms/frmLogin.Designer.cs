@@ -28,124 +28,217 @@
         /// </summary>
         private void InitializeComponent()
         {
-            lblTitle = new Label();
-            lblUsername = new Label();
-            txtUsername = new TextBox();
-            lblPassword = new Label();
-            txtPassword = new TextBox();
-            btnLogin = new Button();
+            pnlMain = new Panel();
+            pnlLoginCard = new Panel();
             lblError = new Label();
+            pnlDivider = new Panel();
+            btnLogin = new Button();
+            pnlPasswordWrapper = new Panel();
+            txtPassword = new TextBox();
+            lblPassword = new Label();
+            pnlUsernameWrapper = new Panel();
+            txtUsername = new TextBox();
+            lblUsername = new Label();
+            pnlBranding = new Panel();
+            picLogo = new PictureBox();
+            pnlMain.SuspendLayout();
+            pnlLoginCard.SuspendLayout();
+            pnlPasswordWrapper.SuspendLayout();
+            pnlUsernameWrapper.SuspendLayout();
+            pnlBranding.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)picLogo).BeginInit();
             SuspendLayout();
             // 
-            // lblTitle
+            // pnlMain
             // 
-            lblTitle.AutoSize = true;
-            lblTitle.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-            lblTitle.ForeColor = Color.DarkBlue;
-            lblTitle.Location = new Point(105, 30);
-            lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(133, 32);
-            lblTitle.TabIndex = 0;
-            lblTitle.Text = "Stev-Hotel";
+            pnlMain.BackColor = Color.White;
+            pnlMain.Controls.Add(pnlLoginCard);
+            pnlMain.Dock = DockStyle.Fill;
+            pnlMain.Location = new Point(0, 0);
+            pnlMain.Name = "pnlMain";
+            pnlMain.Padding = new Padding(40);
+            pnlMain.Size = new Size(500, 650);
+            pnlMain.TabIndex = 0;
             // 
-            // lblUsername
+            // pnlLoginCard
             // 
-            lblUsername.AutoSize = true;
-            lblUsername.Font = new Font("Segoe UI", 11F);
-            lblUsername.Location = new Point(88, 90);
-            lblUsername.Name = "lblUsername";
-            lblUsername.Size = new Size(78, 20);
-            lblUsername.TabIndex = 1;
-            lblUsername.Text = "Username:";
+            pnlLoginCard.BackColor = Color.White;
+            pnlLoginCard.Controls.Add(lblError);
+            pnlLoginCard.Controls.Add(pnlDivider);
+            pnlLoginCard.Controls.Add(btnLogin);
+            pnlLoginCard.Controls.Add(pnlPasswordWrapper);
+            pnlLoginCard.Controls.Add(pnlUsernameWrapper);
+            pnlLoginCard.Controls.Add(pnlBranding);
+            pnlLoginCard.Dock = DockStyle.Fill;
+            pnlLoginCard.Location = new Point(40, 40);
+            pnlLoginCard.Name = "pnlLoginCard";
+            pnlLoginCard.Size = new Size(420, 570);
+            pnlLoginCard.TabIndex = 0;
             // 
-            // txtUsername
+            // lblError
             // 
-            txtUsername.Font = new Font("Segoe UI", 11F);
-            txtUsername.Location = new Point(175, 90);
-            txtUsername.Margin = new Padding(3, 2, 3, 2);
-            txtUsername.Name = "txtUsername";
-            txtUsername.Size = new Size(193, 27);
-            txtUsername.TabIndex = 2;
-            txtUsername.Text = "Admin1";
+            lblError.Font = new Font("Segoe UI", 9F);
+            lblError.ForeColor = Color.Black;
+            lblError.Location = new Point(60, 520);
+            lblError.Name = "lblError";
+            lblError.Size = new Size(300, 40);
+            lblError.TabIndex = 5;
+            lblError.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // pnlDivider
+            // 
+            pnlDivider.BackColor = Color.Black;
+            pnlDivider.Location = new Point(60, 250);
+            pnlDivider.Name = "pnlDivider";
+            pnlDivider.Size = new Size(300, 2);
+            pnlDivider.TabIndex = 4;
+            // 
+            // btnLogin
+            // 
+            btnLogin.BackColor = Color.Black;
+            btnLogin.Cursor = Cursors.Hand;
+            btnLogin.FlatAppearance.BorderSize = 0;
+            btnLogin.FlatStyle = FlatStyle.Flat;
+            btnLogin.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            btnLogin.ForeColor = Color.White;
+            btnLogin.Location = new Point(60, 455);
+            btnLogin.Name = "btnLogin";
+            btnLogin.Size = new Size(300, 50);
+            btnLogin.TabIndex = 3;
+            btnLogin.Text = "SIGN IN";
+            btnLogin.UseVisualStyleBackColor = false;
+            btnLogin.Click += btnLogin_Click;
+            btnLogin.MouseEnter += btnLogin_MouseEnter;
+            btnLogin.MouseLeave += btnLogin_MouseLeave;
+            // 
+            // pnlPasswordWrapper
+            // 
+            pnlPasswordWrapper.BackColor = Color.White;
+            pnlPasswordWrapper.Controls.Add(txtPassword);
+            pnlPasswordWrapper.Controls.Add(lblPassword);
+            pnlPasswordWrapper.Location = new Point(60, 370);
+            pnlPasswordWrapper.Name = "pnlPasswordWrapper";
+            pnlPasswordWrapper.Size = new Size(300, 70);
+            pnlPasswordWrapper.TabIndex = 2;
+            // 
+            // txtPassword
+            // 
+            txtPassword.BackColor = Color.White;
+            txtPassword.BorderStyle = BorderStyle.None;
+            txtPassword.Font = new Font("Segoe UI", 12F);
+            txtPassword.ForeColor = Color.Black;
+            txtPassword.Location = new Point(0, 30);
+            txtPassword.Name = "txtPassword";
+            txtPassword.PasswordChar = '●';
+            txtPassword.PlaceholderText = "Enter password";
+            txtPassword.Size = new Size(300, 22);
+            txtPassword.TabIndex = 2;
+            txtPassword.Text = "Admin@2025";
             // 
             // lblPassword
             // 
             lblPassword.AutoSize = true;
-            lblPassword.Font = new Font("Segoe UI", 11F);
-            lblPassword.Location = new Point(88, 128);
+            lblPassword.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            lblPassword.ForeColor = Color.Black;
+            lblPassword.Location = new Point(0, 5);
             lblPassword.Name = "lblPassword";
-            lblPassword.Size = new Size(73, 20);
-            lblPassword.TabIndex = 3;
-            lblPassword.Text = "Password:";
+            lblPassword.Size = new Size(73, 19);
+            lblPassword.TabIndex = 1;
+            lblPassword.Text = "Password";
             // 
-            // txtPassword
+            // pnlUsernameWrapper
             // 
-            txtPassword.Font = new Font("Segoe UI", 11F);
-            txtPassword.Location = new Point(175, 128);
-            txtPassword.Margin = new Padding(3, 2, 3, 2);
-            txtPassword.Name = "txtPassword";
-            txtPassword.PasswordChar = '*';
-            txtPassword.Size = new Size(193, 27);
-            txtPassword.TabIndex = 4;
-            txtPassword.Text = "Admin@2025";
-            txtPassword.UseSystemPasswordChar = true;
+            pnlUsernameWrapper.BackColor = Color.White;
+            pnlUsernameWrapper.Controls.Add(txtUsername);
+            pnlUsernameWrapper.Controls.Add(lblUsername);
+            pnlUsernameWrapper.Location = new Point(60, 285);
+            pnlUsernameWrapper.Name = "pnlUsernameWrapper";
+            pnlUsernameWrapper.Size = new Size(300, 70);
+            pnlUsernameWrapper.TabIndex = 1;
             // 
-            // btnLogin
+            // txtUsername
             // 
-            btnLogin.BackColor = Color.FromArgb(0, 120, 215);
-            btnLogin.FlatAppearance.BorderSize = 0;
-            btnLogin.FlatStyle = FlatStyle.Flat;
-            btnLogin.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            btnLogin.ForeColor = Color.White;
-            btnLogin.Location = new Point(175, 172);
-            btnLogin.Margin = new Padding(3, 2, 3, 2);
-            btnLogin.Name = "btnLogin";
-            btnLogin.Size = new Size(192, 34);
-            btnLogin.TabIndex = 5;
-            btnLogin.Text = "LOGIN";
-            btnLogin.UseVisualStyleBackColor = false;
-            btnLogin.Click += btnLogin_Click;
+            txtUsername.BackColor = Color.White;
+            txtUsername.BorderStyle = BorderStyle.None;
+            txtUsername.Font = new Font("Segoe UI", 12F);
+            txtUsername.ForeColor = Color.Black;
+            txtUsername.Location = new Point(0, 30);
+            txtUsername.Name = "txtUsername";
+            txtUsername.PlaceholderText = "Enter username";
+            txtUsername.Size = new Size(300, 22);
+            txtUsername.TabIndex = 1;
+            txtUsername.Text = "Admin1";
             // 
-            // lblError
+            // lblUsername
             // 
-            lblError.AutoSize = true;
-            lblError.Font = new Font("Segoe UI", 10F);
-            lblError.ForeColor = Color.Red;
-            lblError.Location = new Point(88, 221);
-            lblError.Name = "lblError";
-            lblError.Size = new Size(0, 19);
-            lblError.TabIndex = 6;
+            lblUsername.AutoSize = true;
+            lblUsername.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            lblUsername.ForeColor = Color.Black;
+            lblUsername.Location = new Point(0, 5);
+            lblUsername.Name = "lblUsername";
+            lblUsername.Size = new Size(76, 19);
+            lblUsername.TabIndex = 0;
+            lblUsername.Text = "Username";
+            // 
+            // pnlBranding
+            // 
+            pnlBranding.Controls.Add(picLogo);
+            pnlBranding.Dock = DockStyle.Top;
+            pnlBranding.Location = new Point(0, 0);
+            pnlBranding.Name = "pnlBranding";
+            pnlBranding.Padding = new Padding(60, 40, 60, 20);
+            pnlBranding.Size = new Size(420, 240);
+            pnlBranding.TabIndex = 0;
+            // 
+            // picLogo
+            // 
+            picLogo.BackColor = Color.White;
+            picLogo.Image = Properties.Resources.unnamed__1_1;
+            picLogo.Location = new Point(0, 40);
+            picLogo.Name = "picLogo";
+            picLogo.Size = new Size(417, 183);
+            picLogo.SizeMode = PictureBoxSizeMode.Zoom;
+            picLogo.TabIndex = 0;
+            picLogo.TabStop = false;
+            picLogo.Click += picLogo_Click;
             // 
             // frmLogin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(455, 285);
-            Controls.Add(lblError);
-            Controls.Add(btnLogin);
-            Controls.Add(txtPassword);
-            Controls.Add(lblPassword);
-            Controls.Add(txtUsername);
-            Controls.Add(lblUsername);
-            Controls.Add(lblTitle);
+            BackColor = Color.White;
+            ClientSize = new Size(500, 650);
+            Controls.Add(pnlMain);
             FormBorderStyle = FormBorderStyle.FixedDialog;
-            Margin = new Padding(3, 2, 3, 2);
             MaximizeBox = false;
             Name = "frmLogin";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Stev-Hotel - Login";
+            pnlMain.ResumeLayout(false);
+            pnlLoginCard.ResumeLayout(false);
+            pnlPasswordWrapper.ResumeLayout(false);
+            pnlPasswordWrapper.PerformLayout();
+            pnlUsernameWrapper.ResumeLayout(false);
+            pnlUsernameWrapper.PerformLayout();
+            pnlBranding.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)picLogo).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
-        private System.Windows.Forms.Label lblTitle;
-        private System.Windows.Forms.Label lblUsername;
-        private System.Windows.Forms.TextBox txtUsername;
-        private System.Windows.Forms.Label lblPassword;
-        private System.Windows.Forms.TextBox txtPassword;
-        private System.Windows.Forms.Button btnLogin;
-        private System.Windows.Forms.Label lblError;
+        private Panel pnlMain;
+        private Panel pnlLoginCard;
+        private Panel pnlBranding;
+        private PictureBox picLogo;
+        private Panel pnlUsernameWrapper;
+        private Label lblUsername;
+        private TextBox txtUsername;
+        private Panel pnlPasswordWrapper;
+        private TextBox txtPassword;
+        private Label lblPassword;
+        private Button btnLogin;
+        private Panel pnlDivider;
+        private Label lblError;
     }
 }

@@ -81,10 +81,24 @@ namespace StevHotel.Forms
             }
         }
 
+        private void btnLogin_MouseEnter(object sender, EventArgs e)
+        {
+            btnLogin.BackColor = Color.FromArgb(25, 35, 58);
+        }
+
+        private void btnLogin_MouseLeave(object sender, EventArgs e)
+        {
+            btnLogin.BackColor = Color.FromArgb(31, 42, 68);
+        }
         private void ShowError(string message)
         {
             lblError.ForeColor = System.Drawing.Color.Red;
             lblError.Text = message;
+        }
+
+        private void picLogo_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
