@@ -279,6 +279,7 @@
         #endregion
 
         private System.Windows.Forms.MenuStrip mainMenuStrip;
+
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem logoutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
