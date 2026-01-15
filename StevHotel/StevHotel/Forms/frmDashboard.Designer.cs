@@ -2,30 +2,18 @@
 {
     partial class frmDashboard
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
-            {
                 components.Dispose();
-            }
+
             base.Dispose(disposing);
         }
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             mainMenuStrip = new MenuStrip();
@@ -46,263 +34,176 @@
             dailySummaryToolStripMenuItem = new ToolStripMenuItem();
             occupancyReportToolStripMenuItem = new ToolStripMenuItem();
             settingsToolStripMenuItem = new ToolStripMenuItem();
-            lblWelcome = new Label();
-            panelStats = new Panel();
-            lblOccupancy = new Label();
-            lblRevenue = new Label();
-            lblStatus = new Label();
             statusStrip1 = new StatusStrip();
             toolStripStatusLabel = new ToolStripStatusLabel();
-            mainMenuStrip.SuspendLayout();
-            panelStats.SuspendLayout();
-            statusStrip1.SuspendLayout();
-            SuspendLayout();
-            // 
-            // mainMenuStrip
-            // 
-            mainMenuStrip.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, roomsToolStripMenuItem, reservationsToolStripMenuItem, guestsToolStripMenuItem, billingToolStripMenuItem, reportsToolStripMenuItem, settingsToolStripMenuItem });
+            lblWelcome = new Label();
+            panelDashboardStats = new Panel();
+            lblOccupancyTitle = new Label();
+            lblOccupancyValue = new Label();
+            lblRevenueTitle = new Label();
+            lblRevenueValue = new Label();
+
+            // MenuStrip
+            mainMenuStrip.Items.AddRange(new ToolStripItem[]
+            {
+                fileToolStripMenuItem,
+                roomsToolStripMenuItem,
+                reservationsToolStripMenuItem,
+                guestsToolStripMenuItem,
+                billingToolStripMenuItem,
+                reportsToolStripMenuItem,
+                settingsToolStripMenuItem
+            });
             mainMenuStrip.Location = new Point(0, 0);
             mainMenuStrip.Name = "mainMenuStrip";
-            mainMenuStrip.Padding = new Padding(7, 2, 0, 2);
-            mainMenuStrip.Size = new Size(933, 24);
-            mainMenuStrip.TabIndex = 0;
-            mainMenuStrip.Text = "menuStrip1";
-            // 
-            // fileToolStripMenuItem
-            // 
-            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { logoutToolStripMenuItem, exitToolStripMenuItem });
-            fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            fileToolStripMenuItem.Size = new Size(37, 20);
+            mainMenuStrip.Size = new Size(1000, 24);
+
+            // File
             fileToolStripMenuItem.Text = "&File";
-            // 
-            // logoutToolStripMenuItem
-            // 
-            logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
-            logoutToolStripMenuItem.Size = new Size(112, 22);
+            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[]
+            {
+                logoutToolStripMenuItem,
+                exitToolStripMenuItem
+            });
+
             logoutToolStripMenuItem.Text = "&Logout";
             logoutToolStripMenuItem.Click += logoutToolStripMenuItem_Click;
-            // 
-            // exitToolStripMenuItem
-            // 
-            exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            exitToolStripMenuItem.Size = new Size(112, 22);
+
             exitToolStripMenuItem.Text = "E&xit";
             exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
-            // 
-            // roomsToolStripMenuItem
-            // 
-            roomsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { roomListToolStripMenuItem, addNewRoomToolStripMenuItem });
-            roomsToolStripMenuItem.Name = "roomsToolStripMenuItem";
-            roomsToolStripMenuItem.Size = new Size(56, 20);
+
+            // Rooms
             roomsToolStripMenuItem.Text = "&Rooms";
-            // 
-            // roomListToolStripMenuItem
-            // 
-            roomListToolStripMenuItem.Name = "roomListToolStripMenuItem";
-            roomListToolStripMenuItem.Size = new Size(158, 22);
+            roomsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[]
+            {
+                roomListToolStripMenuItem,
+                addNewRoomToolStripMenuItem
+            });
+
             roomListToolStripMenuItem.Text = "Room &List";
             roomListToolStripMenuItem.Click += roomListToolStripMenuItem_Click;
-            // 
-            // addNewRoomToolStripMenuItem
-            // 
-            addNewRoomToolStripMenuItem.Name = "addNewRoomToolStripMenuItem";
-            addNewRoomToolStripMenuItem.Size = new Size(158, 22);
+
             addNewRoomToolStripMenuItem.Text = "Add New &Room";
-            // 
-            // reservationsToolStripMenuItem
-            // 
-            reservationsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { newReservationToolStripMenuItem, reservationListToolStripMenuItem });
-            reservationsToolStripMenuItem.Name = "reservationsToolStripMenuItem";
-            reservationsToolStripMenuItem.Size = new Size(85, 20);
+
+            // Reservations
             reservationsToolStripMenuItem.Text = "&Reservations";
-            // 
-            // newReservationToolStripMenuItem
-            // 
-            newReservationToolStripMenuItem.Name = "newReservationToolStripMenuItem";
-            newReservationToolStripMenuItem.Size = new Size(162, 22);
+            reservationsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[]
+            {
+                newReservationToolStripMenuItem,
+                reservationListToolStripMenuItem
+            });
+
             newReservationToolStripMenuItem.Text = "New &Reservation";
             newReservationToolStripMenuItem.Click += newReservationToolStripMenuItem_Click;
-            // 
-            // reservationListToolStripMenuItem
-            // 
-            reservationListToolStripMenuItem.Name = "reservationListToolStripMenuItem";
-            reservationListToolStripMenuItem.Size = new Size(162, 22);
+
             reservationListToolStripMenuItem.Text = "Reservation &List";
             reservationListToolStripMenuItem.Click += reservationListToolStripMenuItem_Click;
-            // 
-            // guestsToolStripMenuItem
-            // 
-            guestsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { guestListToolStripMenuItem });
-            guestsToolStripMenuItem.Name = "guestsToolStripMenuItem";
-            guestsToolStripMenuItem.Size = new Size(54, 20);
+
+            // Guests
             guestsToolStripMenuItem.Text = "&Guests";
-            // 
-            // guestListToolStripMenuItem
-            // 
-            guestListToolStripMenuItem.Name = "guestListToolStripMenuItem";
-            guestListToolStripMenuItem.Size = new Size(180, 22);
+            guestsToolStripMenuItem.DropDownItems.Add(guestListToolStripMenuItem);
+
             guestListToolStripMenuItem.Text = "Guest &List";
             guestListToolStripMenuItem.Click += guestListToolStripMenuItem_Click;
-            // 
-            // billingToolStripMenuItem
-            // 
-            billingToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { invoicesToolStripMenuItem });
-            billingToolStripMenuItem.Name = "billingToolStripMenuItem";
-            billingToolStripMenuItem.Size = new Size(52, 20);
+
+            // Billing
             billingToolStripMenuItem.Text = "&Billing";
-            // 
-            // invoicesToolStripMenuItem
-            // 
-            invoicesToolStripMenuItem.Name = "invoicesToolStripMenuItem";
-            invoicesToolStripMenuItem.Size = new Size(117, 22);
+            billingToolStripMenuItem.DropDownItems.Add(invoicesToolStripMenuItem);
+
             invoicesToolStripMenuItem.Text = "&Invoices";
-            // 
-            // reportsToolStripMenuItem
-            // 
-            reportsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { dailySummaryToolStripMenuItem, occupancyReportToolStripMenuItem });
-            reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
-            reportsToolStripMenuItem.Size = new Size(59, 20);
+
+            // Reports
             reportsToolStripMenuItem.Text = "&Reports";
-            // 
-            // dailySummaryToolStripMenuItem
-            // 
-            dailySummaryToolStripMenuItem.Name = "dailySummaryToolStripMenuItem";
-            dailySummaryToolStripMenuItem.Size = new Size(172, 22);
+            reportsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[]
+            {
+                dailySummaryToolStripMenuItem,
+                occupancyReportToolStripMenuItem
+            });
+
             dailySummaryToolStripMenuItem.Text = "Daily &Summary";
-            // 
-            // occupancyReportToolStripMenuItem
-            // 
-            occupancyReportToolStripMenuItem.Name = "occupancyReportToolStripMenuItem";
-            occupancyReportToolStripMenuItem.Size = new Size(172, 22);
             occupancyReportToolStripMenuItem.Text = "Occupancy &Report";
-            // 
-            // settingsToolStripMenuItem
-            // 
-            settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            settingsToolStripMenuItem.Size = new Size(61, 20);
+
+            // Settings
             settingsToolStripMenuItem.Text = "&Settings";
-            // 
-            // lblWelcome
-            // 
+
+            // Welcome label
             lblWelcome.AutoSize = true;
             lblWelcome.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
-            lblWelcome.Location = new Point(35, 46);
-            lblWelcome.Margin = new Padding(4, 0, 4, 0);
-            lblWelcome.Name = "lblWelcome";
-            lblWelcome.Size = new Size(0, 30);
-            lblWelcome.TabIndex = 1;
-            // 
-            // panelStats
-            // 
-            panelStats.Controls.Add(lblOccupancy);
-            panelStats.Controls.Add(lblRevenue);
-            panelStats.Location = new Point(35, 104);
-            panelStats.Margin = new Padding(4, 3, 4, 3);
-            panelStats.Name = "panelStats";
-            panelStats.Size = new Size(863, 138);
-            panelStats.TabIndex = 2;
-            // 
-            // lblOccupancy
-            // 
-            lblOccupancy.AutoSize = true;
-            lblOccupancy.Font = new Font("Segoe UI", 12F);
-            lblOccupancy.Location = new Point(12, 23);
-            lblOccupancy.Margin = new Padding(4, 0, 4, 0);
-            lblOccupancy.Name = "lblOccupancy";
-            lblOccupancy.Size = new Size(234, 21);
-            lblOccupancy.TabIndex = 0;
-            lblOccupancy.Text = "Today’s Occupancy: Calculating...";
-            // 
-            // lblRevenue
-            // 
-            lblRevenue.AutoSize = true;
-            lblRevenue.Font = new Font("Segoe UI", 12F);
-            lblRevenue.Location = new Point(12, 69);
-            lblRevenue.Margin = new Padding(4, 0, 4, 0);
-            lblRevenue.Name = "lblRevenue";
-            lblRevenue.Size = new Size(218, 21);
-            lblRevenue.TabIndex = 1;
-            lblRevenue.Text = "Today’s Revenue: Calculating...";
-            // 
-            // lblStatus
-            // 
-            lblStatus.AutoSize = true;
-            lblStatus.Location = new Point(35, 265);
-            lblStatus.Margin = new Padding(4, 0, 4, 0);
-            lblStatus.Name = "lblStatus";
-            lblStatus.Size = new Size(0, 15);
-            lblStatus.TabIndex = 3;
-            // 
-            // statusStrip1
-            // 
-            statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel });
-            statusStrip1.Location = new Point(0, 497);
-            statusStrip1.Name = "statusStrip1";
-            statusStrip1.Padding = new Padding(1, 0, 16, 0);
-            statusStrip1.Size = new Size(933, 22);
-            statusStrip1.TabIndex = 4;
-            statusStrip1.Text = "statusStrip1";
-            // 
-            // toolStripStatusLabel
-            // 
-            toolStripStatusLabel.Name = "toolStripStatusLabel";
-            toolStripStatusLabel.Size = new Size(80, 17);
-            toolStripStatusLabel.Text = "Logged in as: ";
-            // 
-            // frmDashboard
-            // 
+            lblWelcome.Location = new Point(30, 40);
+            lblWelcome.Text = "Welcome";
+
+            // Dashboard Stats Panel
+            panelDashboardStats.Location = new Point(30, 90);
+            panelDashboardStats.Size = new Size(800, 120);
+            panelDashboardStats.BackColor = Color.FromArgb(240, 248, 255);
+
+            lblOccupancyTitle.Text = "Today's Occupancy";
+            lblOccupancyTitle.Location = new Point(20, 20);
+
+            lblOccupancyValue.Text = "0%";
+            lblOccupancyValue.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            lblOccupancyValue.Location = new Point(20, 45);
+
+            lblRevenueTitle.Text = "Today's Revenue";
+            lblRevenueTitle.Location = new Point(300, 20);
+
+            lblRevenueValue.Text = "$0.00";
+            lblRevenueValue.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            lblRevenueValue.Location = new Point(300, 45);
+
+            panelDashboardStats.Controls.Add(lblOccupancyTitle);
+            panelDashboardStats.Controls.Add(lblOccupancyValue);
+            panelDashboardStats.Controls.Add(lblRevenueTitle);
+            panelDashboardStats.Controls.Add(lblRevenueValue);
+
+            // StatusStrip
+            statusStrip1.Items.Add(toolStripStatusLabel);
+            statusStrip1.Location = new Point(0, 540);
+            toolStripStatusLabel.Text = "Logged in as:";
+
+            // Form
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(933, 519);
-            Controls.Add(lblStatus);
-            Controls.Add(panelStats);
+            ClientSize = new Size(1000, 562);
+            Controls.Add(panelDashboardStats);
             Controls.Add(lblWelcome);
             Controls.Add(mainMenuStrip);
             Controls.Add(statusStrip1);
             MainMenuStrip = mainMenuStrip;
-            Margin = new Padding(4, 3, 4, 3);
             Name = "frmDashboard";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Stev-Hotel Dashboard";
             WindowState = FormWindowState.Maximized;
             Load += frmDashboard_Load;
-            mainMenuStrip.ResumeLayout(false);
-            mainMenuStrip.PerformLayout();
-            panelStats.ResumeLayout(false);
-            panelStats.PerformLayout();
-            statusStrip1.ResumeLayout(false);
-            statusStrip1.PerformLayout();
-            ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip mainMenuStrip;
-
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem logoutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem roomsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem roomListToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem addNewRoomToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem reservationsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem newReservationToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem reservationListToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem guestsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem guestListToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem billingToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem invoicesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem dailySummaryToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem occupancyReportToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
-        private System.Windows.Forms.Label lblWelcome;
-        private System.Windows.Forms.Panel panelStats;
-        private System.Windows.Forms.Label lblOccupancy;
-        private System.Windows.Forms.Label lblRevenue;
-        private System.Windows.Forms.Label lblStatus;
-        private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
+        private MenuStrip mainMenuStrip;
+        private ToolStripMenuItem fileToolStripMenuItem;
+        private ToolStripMenuItem logoutToolStripMenuItem;
+        private ToolStripMenuItem exitToolStripMenuItem;
+        private ToolStripMenuItem roomsToolStripMenuItem;
+        private ToolStripMenuItem roomListToolStripMenuItem;
+        private ToolStripMenuItem addNewRoomToolStripMenuItem;
+        private ToolStripMenuItem reservationsToolStripMenuItem;
+        private ToolStripMenuItem newReservationToolStripMenuItem;
+        private ToolStripMenuItem reservationListToolStripMenuItem;
+        private ToolStripMenuItem guestsToolStripMenuItem;
+        private ToolStripMenuItem guestListToolStripMenuItem;
+        private ToolStripMenuItem billingToolStripMenuItem;
+        private ToolStripMenuItem invoicesToolStripMenuItem;
+        private ToolStripMenuItem reportsToolStripMenuItem;
+        private ToolStripMenuItem dailySummaryToolStripMenuItem;
+        private ToolStripMenuItem occupancyReportToolStripMenuItem;
+        private ToolStripMenuItem settingsToolStripMenuItem;
+        private StatusStrip statusStrip1;
+        private ToolStripStatusLabel toolStripStatusLabel;
+        private Label lblWelcome;
+        private Panel panelDashboardStats;
+        private Label lblOccupancyTitle;
+        private Label lblOccupancyValue;
+        private Label lblRevenueTitle;
+        private Label lblRevenueValue;
     }
 }
