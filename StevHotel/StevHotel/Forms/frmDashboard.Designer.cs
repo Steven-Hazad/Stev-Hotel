@@ -132,7 +132,7 @@
             // guestListToolStripMenuItem
             // 
             guestListToolStripMenuItem.Name = "guestListToolStripMenuItem";
-            guestListToolStripMenuItem.Size = new Size(32, 19);
+            guestListToolStripMenuItem.Size = new Size(180, 22);
             guestListToolStripMenuItem.Text = "Guest &List";
             guestListToolStripMenuItem.Click += guestListToolStripMenuItem_Click;
             // 
@@ -146,7 +146,7 @@
             // invoicesToolStripMenuItem
             // 
             invoicesToolStripMenuItem.Name = "invoicesToolStripMenuItem";
-            invoicesToolStripMenuItem.Size = new Size(32, 19);
+            invoicesToolStripMenuItem.Size = new Size(117, 22);
             invoicesToolStripMenuItem.Text = "&Invoices";
             // 
             // reportsToolStripMenuItem
@@ -173,6 +173,7 @@
             settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             settingsToolStripMenuItem.Size = new Size(61, 20);
             settingsToolStripMenuItem.Text = "&Settings";
+            settingsToolStripMenuItem.Click += settingsToolStripMenuItem_Click;
             // 
             // statusStrip1
             // 

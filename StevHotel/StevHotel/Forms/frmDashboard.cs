@@ -99,5 +99,17 @@ namespace StevHotel.Forms
         {
             new frmGuestList().ShowDialog();
         }
+
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmLogin.CurrentUser?.Role?.RoleName != "Admin")
+            {
+                MessageBox.Show("Only Admins can view activity logs.");
+                return;
+            }
+
+            var logForm = new frmActivityLog();
+            logForm.ShowDialog();
+        }
     }
 }
