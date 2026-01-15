@@ -29,35 +29,40 @@ namespace StevHotel.Forms
         private void LoadDashboardStats()
         {
             var today = DateTime.Today;
-
-            // Total rooms
-            int totalRooms = _db.Rooms.Count();
-
-            // Occupied rooms today
-            int occupied = _db.Rooms.Count(r => r.Status == "Occupied");
-
-            // Occupancy %
-            double occupancy = totalRooms > 0
-                ? (occupied * 100.0 / totalRooms)
-                : 0;
-
-            lblOccupancyValue.Text = $"{occupancy:F1}%";
-            lblOccupancyValue.ForeColor =
-                occupancy >= 70 ? Color.Green :
-                occupancy < 30 ? Color.Red :
-                Color.Orange;
-
-            // Today's revenue
             var tomorrow = today.AddDays(1);
 
-            decimal todayRevenue =
+            int totalRooms = _db.Rooms.Count();
+            int occupied = _db.Rooms.Count(r => r.Status == "Occupied");
+
+            double occupancy = totalRooms > 0 ? (occupied * 100.0 / totalRooms) : 0;
+            lblOccupancyValue.Text = $"{occupancy:F1}%";
+            lblOccupiedRooms.Text = $"Occupied: {occupied} / {totalRooms}";
+
+            lblOccupancyValue.ForeColor =
+                occupancy >= 70 ? Color.ForestGreen :
+                occupancy < 30 ? Color.Crimson :
+                Color.DarkOrange;
+
+            int arrivals = _db.Reservations.Count(r =>
+                r.CheckInDate >= today &&
+                r.CheckInDate < tomorrow &&
+                r.Status != "Cancelled");
+
+            lblArrivalsValue.Text = arrivals.ToString();
+
+            int departures = _db.Reservations.Count(r =>
+                r.CheckOutDate >= today &&
+                r.CheckOutDate < tomorrow &&
+                r.Status != "Cancelled");
+
+            lblDeparturesValue.Text = departures.ToString();
+
+            decimal revenueToday =
                 _db.Payments
-                    .Where(p => p.PaymentDate >= today && p.PaymentDate < tomorrow)
-                    .Sum(p => (decimal?)p.Amount) ?? 0;
+                   .Where(p => p.PaymentDate >= today && p.PaymentDate < tomorrow)
+                   .Sum(p => (decimal?)p.Amount) ?? 0;
 
-
-
-            lblRevenueValue.Text = $"{todayRevenue:N2} USD";
+            lblRevenueValue.Text = $"{revenueToday:N2} USD";
         }
 
         private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -77,26 +82,22 @@ namespace StevHotel.Forms
 
         private void roomListToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var roomList = new frmRoomList();
-            roomList.ShowDialog();
+            new frmRoomList().ShowDialog();
         }
 
         private void newReservationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using var newRes = new frmNewReservation();
-            newRes.ShowDialog();
+            new frmNewReservation().ShowDialog();
         }
 
         private void reservationListToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var resList = new frmReservationList();
-            resList.ShowDialog();
+            new frmReservationList().ShowDialog();
         }
 
         private void guestListToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var guestList = new frmGuestList();
-            guestList.ShowDialog();
+            new frmGuestList().ShowDialog();
         }
     }
 }
