@@ -123,5 +123,11 @@ namespace StevHotel.Forms
             var cleaning = new frmCleaningSchedule();
             cleaning.ShowDialog();
         }
+
+        private void invoicesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var invoices = new frmInvoiceList();
+            invoices.ShowDialog();
+        }
     }
 }

@@ -34,6 +34,7 @@
             dailySummaryToolStripMenuItem = new ToolStripMenuItem();
             occupancyReportToolStripMenuItem = new ToolStripMenuItem();
             settingsToolStripMenuItem = new ToolStripMenuItem();
+            cleaningScheduleToolStripMenuItem = new ToolStripMenuItem();
             statusStrip1 = new StatusStrip();
             toolStripStatusLabel = new ToolStripStatusLabel();
             lblWelcome = new Label();
@@ -47,7 +48,6 @@
             lblDeparturesValue = new Label();
             lblRevenueTitle = new Label();
             lblRevenueValue = new Label();
-            cleaningScheduleToolStripMenuItem = new ToolStripMenuItem();
             mainMenuStrip.SuspendLayout();
             statusStrip1.SuspendLayout();
             panelStats.SuspendLayout();
@@ -71,14 +71,14 @@
             // logoutToolStripMenuItem
             // 
             logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
-            logoutToolStripMenuItem.Size = new Size(180, 22);
+            logoutToolStripMenuItem.Size = new Size(112, 22);
             logoutToolStripMenuItem.Text = "&Logout";
             logoutToolStripMenuItem.Click += logoutToolStripMenuItem_Click;
             // 
             // exitToolStripMenuItem
             // 
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            exitToolStripMenuItem.Size = new Size(180, 22);
+            exitToolStripMenuItem.Size = new Size(112, 22);
             exitToolStripMenuItem.Text = "E&xit";
             exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
             // 
@@ -92,14 +92,14 @@
             // roomListToolStripMenuItem
             // 
             roomListToolStripMenuItem.Name = "roomListToolStripMenuItem";
-            roomListToolStripMenuItem.Size = new Size(180, 22);
+            roomListToolStripMenuItem.Size = new Size(158, 22);
             roomListToolStripMenuItem.Text = "Room &List";
             roomListToolStripMenuItem.Click += roomListToolStripMenuItem_Click;
             // 
             // addNewRoomToolStripMenuItem
             // 
             addNewRoomToolStripMenuItem.Name = "addNewRoomToolStripMenuItem";
-            addNewRoomToolStripMenuItem.Size = new Size(180, 22);
+            addNewRoomToolStripMenuItem.Size = new Size(158, 22);
             addNewRoomToolStripMenuItem.Text = "Add New &Room";
             // 
             // reservationsToolStripMenuItem
@@ -133,7 +133,7 @@
             // guestListToolStripMenuItem
             // 
             guestListToolStripMenuItem.Name = "guestListToolStripMenuItem";
-            guestListToolStripMenuItem.Size = new Size(180, 22);
+            guestListToolStripMenuItem.Size = new Size(125, 22);
             guestListToolStripMenuItem.Text = "Guest &List";
             guestListToolStripMenuItem.Click += guestListToolStripMenuItem_Click;
             // 
@@ -149,6 +149,7 @@
             invoicesToolStripMenuItem.Name = "invoicesToolStripMenuItem";
             invoicesToolStripMenuItem.Size = new Size(180, 22);
             invoicesToolStripMenuItem.Text = "&Invoices";
+            invoicesToolStripMenuItem.Click += invoicesToolStripMenuItem_Click;
             // 
             // reportsToolStripMenuItem
             // 
@@ -176,6 +177,13 @@
             settingsToolStripMenuItem.Size = new Size(61, 20);
             settingsToolStripMenuItem.Text = "&Settings";
             settingsToolStripMenuItem.Click += settingsToolStripMenuItem_Click;
+            // 
+            // cleaningScheduleToolStripMenuItem
+            // 
+            cleaningScheduleToolStripMenuItem.Name = "cleaningScheduleToolStripMenuItem";
+            cleaningScheduleToolStripMenuItem.Size = new Size(117, 20);
+            cleaningScheduleToolStripMenuItem.Text = "Cleaning Schedule";
+            cleaningScheduleToolStripMenuItem.Click += cleaningScheduleToolStripMenuItem_Click;
             // 
             // statusStrip1
             // 
@@ -292,13 +300,6 @@
             lblRevenueValue.Size = new Size(100, 35);
             lblRevenueValue.TabIndex = 8;
             lblRevenueValue.Text = "0.00 USD";
-            // 
-            // cleaningScheduleToolStripMenuItem
-            // 
-            cleaningScheduleToolStripMenuItem.Name = "cleaningScheduleToolStripMenuItem";
-            cleaningScheduleToolStripMenuItem.Size = new Size(117, 20);
-            cleaningScheduleToolStripMenuItem.Text = "Cleaning Schedule";
-            cleaningScheduleToolStripMenuItem.Click += cleaningScheduleToolStripMenuItem_Click;
             // 
             // frmDashboard
             // 
