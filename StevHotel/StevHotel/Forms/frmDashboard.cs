@@ -111,5 +111,11 @@ namespace StevHotel.Forms
             var logForm = new frmActivityLog();
             logForm.ShowDialog();
         }
+
+        private void dailySummaryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var report = new frmDailyReport();
+            report.ShowDialog();
+        }
     }
 }

@@ -132,7 +132,7 @@
             // guestListToolStripMenuItem
             // 
             guestListToolStripMenuItem.Name = "guestListToolStripMenuItem";
-            guestListToolStripMenuItem.Size = new Size(180, 22);
+            guestListToolStripMenuItem.Size = new Size(125, 22);
             guestListToolStripMenuItem.Text = "Guest &List";
             guestListToolStripMenuItem.Click += guestListToolStripMenuItem_Click;
             // 
@@ -159,13 +159,14 @@
             // dailySummaryToolStripMenuItem
             // 
             dailySummaryToolStripMenuItem.Name = "dailySummaryToolStripMenuItem";
-            dailySummaryToolStripMenuItem.Size = new Size(172, 22);
+            dailySummaryToolStripMenuItem.Size = new Size(180, 22);
             dailySummaryToolStripMenuItem.Text = "Daily &Summary";
+            dailySummaryToolStripMenuItem.Click += dailySummaryToolStripMenuItem_Click;
             // 
             // occupancyReportToolStripMenuItem
             // 
             occupancyReportToolStripMenuItem.Name = "occupancyReportToolStripMenuItem";
-            occupancyReportToolStripMenuItem.Size = new Size(172, 22);
+            occupancyReportToolStripMenuItem.Size = new Size(180, 22);
             occupancyReportToolStripMenuItem.Text = "Occupancy &Report";
             // 
             // settingsToolStripMenuItem

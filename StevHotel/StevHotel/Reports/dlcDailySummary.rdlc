@@ -1,0 +1,678 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+	<DataSources>
+		<DataSource Name="dsDailySummary">
+			<ConnectionProperties>
+				<DataProvider>System.Data.DataSet</DataProvider>
+				<ConnectString />
+			</ConnectionProperties>
+		</DataSource>
+	</DataSources>
+	<DataSets>
+		<DataSet Name="Summary" DataSourceName="dsDailySummary">
+			<Query>
+				<DataSourceName>dsDailySummary</DataSourceName>
+				<CommandText></CommandText>
+			</Query>
+			<Fields>
+				<Field Name="ReportDate">
+					<DataField>ReportDate</DataField>
+				</Field>
+				<Field Name="TotalRooms">
+					<DataField>TotalRooms</DataField>
+				</Field>
+				<Field Name="Occupied">
+					<DataField>Occupied</DataField>
+				</Field>
+				<Field Name="OccupancyPercent">
+					<DataField>OccupancyPercent</DataField>
+				</Field>
+				<Field Name="Revenue">
+					<DataField>Revenue</DataField>
+				</Field>
+				<Field Name="Arrivals">
+					<DataField>Arrivals</DataField>
+				</Field>
+				<Field Name="Departures">
+					<DataField>Departures</DataField>
+				</Field>
+			</Fields>
+		</DataSet>
+	</DataSets>
+	<Body>
+		<ReportItems>
+			<!-- Title -->
+			<Textbox Name="txtTitle">
+				<CanGrow>true</CanGrow>
+				<KeepTogether>true</KeepTogether>
+				<Left>0.5in</Left>
+				<Top>0.1in</Top>
+				<Height>0.5in</Height>
+				<Width>6in</Width>
+				<Paragraphs>
+					<Paragraph>
+						<TextRuns>
+							<TextRun>
+								<Value>Stev-Hotel Daily Summary Report</Value>
+								<Style>
+									<FontFamily>Segoe UI</FontFamily>
+									<FontSize>18pt</FontSize>
+									<FontWeight>Bold</FontWeight>
+									<Color>#003366</Color>
+								</Style>
+							</TextRun>
+						</TextRuns>
+						<Style>
+							<TextAlign>Center</TextAlign>
+						</Style>
+					</Paragraph>
+				</Paragraphs>
+				<Style />
+			</Textbox>
+
+			<!-- Report Date -->
+			<Textbox Name="txtDate">
+				<CanGrow>true</CanGrow>
+				<KeepTogether>true</KeepTogether>
+				<Left>0.5in</Left>
+				<Top>0.7in</Top>
+				<Height>0.25in</Height>
+				<Width>6in</Width>
+				<Paragraphs>
+					<Paragraph>
+						<TextRuns>
+							<TextRun>
+								<Value>= "Report for: " &amp; Fields!ReportDate.Value</Value>
+								<Style>
+									<FontFamily>Segoe UI</FontFamily>
+									<FontSize>12pt</FontSize>
+								</Style>
+							</TextRun>
+						</TextRuns>
+						<Style>
+							<TextAlign>Center</TextAlign>
+						</Style>
+					</Paragraph>
+				</Paragraphs>
+				<Style />
+			</Textbox>
+
+			<!-- Summary Table -->
+			<Tablix Name="TablixSummary">
+				<TablixBody>
+					<TablixColumns>
+						<TablixColumn>
+							<Width>2in</Width>
+						</TablixColumn>
+						<TablixColumn>
+							<Width>1.5in</Width>
+						</TablixColumn>
+						<TablixColumn>
+							<Width>2.5in</Width>
+						</TablixColumn>
+					</TablixColumns>
+					<TablixRows>
+						<!-- Header Row -->
+						<TablixRow>
+							<Height>0.4in</Height>
+							<TablixCells>
+								<TablixCell>
+									<CellContents>
+										<Textbox Name="HeaderMetric">
+											<Paragraphs>
+												<Paragraph>
+													<TextRuns>
+														<TextRun>
+															<Value>Metric</Value>
+															<Style>
+																<FontWeight>Bold</FontWeight>
+															</Style>
+														</TextRun>
+													</TextRuns>
+													<Style>
+														<TextAlign>Center</TextAlign>
+													</Style>
+												</Paragraph>
+											</Paragraphs>
+											<Style>
+												<BackgroundColor>#DDEBF7</BackgroundColor>
+												<Border>
+													<Color>#000000</Color>
+													<Style>Solid</Style>
+												</Border>
+											</Style>
+										</Textbox>
+									</CellContents>
+								</TablixCell>
+								<TablixCell>
+									<CellContents>
+										<Textbox Name="HeaderValue">
+											<Paragraphs>
+												<Paragraph>
+													<TextRuns>
+														<TextRun>
+															<Value>Value</Value>
+															<Style>
+																<FontWeight>Bold</FontWeight>
+															</Style>
+														</TextRun>
+													</TextRuns>
+													<Style>
+														<TextAlign>Center</TextAlign>
+													</Style>
+												</Paragraph>
+											</Paragraphs>
+											<Style>
+												<BackgroundColor>#DDEBF7</BackgroundColor>
+												<Border>
+													<Color>#000000</Color>
+													<Style>Solid</Style>
+												</Border>
+											</Style>
+										</Textbox>
+									</CellContents>
+								</TablixCell>
+								<TablixCell>
+									<CellContents>
+										<Textbox Name="HeaderDetails">
+											<Paragraphs>
+												<Paragraph>
+													<TextRuns>
+														<TextRun>
+															<Value>Details</Value>
+															<Style>
+																<FontWeight>Bold</FontWeight>
+															</Style>
+														</TextRun>
+													</TextRuns>
+													<Style>
+														<TextAlign>Center</TextAlign>
+													</Style>
+												</Paragraph>
+											</Paragraphs>
+											<Style>
+												<BackgroundColor>#DDEBF7</BackgroundColor>
+												<Border>
+													<Color>#000000</Color>
+													<Style>Solid</Style>
+												</Border>
+											</Style>
+										</Textbox>
+									</CellContents>
+								</TablixCell>
+							</TablixCells>
+						</TablixRow>
+
+						<!-- Data Rows (all 7) -->
+						<TablixRow>
+							<Height>0.3in</Height>
+							<TablixCells>
+								<TablixCell>
+									<CellContents>
+										<Textbox Name="txtTotalRooms">
+											<Paragraphs>
+												<Paragraph>
+													<TextRuns>
+														<TextRun>
+															<Value>Total Rooms</Value>
+														</TextRun>
+													</TextRuns>
+												</Paragraph>
+											</Paragraphs>
+											<Style>
+												<Border>
+													<Color>#000000</Color>
+													<Style>Solid</Style>
+												</Border>
+											</Style>
+										</Textbox>
+									</CellContents>
+								</TablixCell>
+								<TablixCell>
+									<CellContents>
+										<Textbox Name="valTotalRooms">
+											<Paragraphs>
+												<Paragraph>
+													<TextRuns>
+														<TextRun>
+															<Value>=Fields!TotalRooms.Value</Value>
+														</TextRun>
+													</TextRuns>
+													<Style>
+														<TextAlign>Right</TextAlign>
+													</Style>
+												</Paragraph>
+											</Paragraphs>
+											<Style>
+												<Border>
+													<Color>#000000</Color>
+													<Style>Solid</Style>
+												</Border>
+											</Style>
+										</Textbox>
+									</CellContents>
+								</TablixCell>
+								<TablixCell>
+									<CellContents>
+										<Textbox Name="detTotalRooms">
+											<Paragraphs>
+												<Paragraph>
+													<TextRuns>
+														<TextRun>
+															<Value>Total available rooms in the hotel</Value>
+														</TextRun>
+													</TextRuns>
+												</Paragraph>
+											</Paragraphs>
+											<Style>
+												<Border>
+													<Color>#000000</Color>
+													<Style>Solid</Style>
+												</Border>
+											</Style>
+										</Textbox>
+									</CellContents>
+								</TablixCell>
+							</TablixCells>
+						</TablixRow>
+
+						<TablixRow>
+							<Height>0.3in</Height>
+							<TablixCells>
+								<TablixCell>
+									<CellContents>
+										<Textbox Name="txtOccupied">
+											<Paragraphs>
+												<Paragraph>
+													<TextRuns>
+														<TextRun>
+															<Value>Occupied Rooms</Value>
+														</TextRun>
+													</TextRuns>
+												</Paragraph>
+											</Paragraphs>
+											<Style>
+												<Border>
+													<Color>#000000</Color>
+													<Style>Solid</Style>
+												</Border>
+											</Style>
+										</Textbox>
+									</CellContents>
+								</TablixCell>
+								<TablixCell>
+									<CellContents>
+										<Textbox Name="valOccupied">
+											<Paragraphs>
+												<Paragraph>
+													<TextRuns>
+														<TextRun>
+															<Value>=Fields!Occupied.Value</Value>
+														</TextRun>
+													</TextRuns>
+													<Style>
+														<TextAlign>Right</TextAlign>
+													</Style>
+												</Paragraph>
+											</Paragraphs>
+											<Style>
+												<Border>
+													<Color>#000000</Color>
+													<Style>Solid</Style>
+												</Border>
+											</Style>
+										</Textbox>
+									</CellContents>
+								</TablixCell>
+								<TablixCell>
+									<CellContents>
+										<Textbox Name="detOccupied">
+											<Paragraphs>
+												<Paragraph>
+													<TextRuns>
+														<TextRun>
+															<Value>Currently occupied</Value>
+														</TextRun>
+													</TextRuns>
+												</Paragraph>
+											</Paragraphs>
+											<Style>
+												<Border>
+													<Color>#000000</Color>
+													<Style>Solid</Style>
+												</Border>
+											</Style>
+										</Textbox>
+									</CellContents>
+								</TablixCell>
+							</TablixCells>
+						</TablixRow>
+
+						<TablixRow>
+							<Height>0.3in</Height>
+							<TablixCells>
+								<TablixCell>
+									<CellContents>
+										<Textbox Name="txtOccupancy">
+											<Paragraphs>
+												<Paragraph>
+													<TextRuns>
+														<TextRun>
+															<Value>Occupancy Percentage</Value>
+														</TextRun>
+													</TextRuns>
+												</Paragraph>
+											</Paragraphs>
+											<Style>
+												<Border>
+													<Color>#000000</Color>
+													<Style>Solid</Style>
+												</Border>
+											</Style>
+										</Textbox>
+									</CellContents>
+								</TablixCell>
+								<TablixCell>
+									<CellContents>
+										<Textbox Name="valOccupancy">
+											<Paragraphs>
+												<Paragraph>
+													<TextRuns>
+														<TextRun>
+															<Value>=FormatPercent(Fields!OccupancyPercent.Value / 100, 1)</Value>
+														</TextRun>
+													</TextRuns>
+													<Style>
+														<TextAlign>Right</TextAlign>
+													</Style>
+												</Paragraph>
+											</Paragraphs>
+											<Style>
+												<Border>
+													<Color>#000000</Color>
+													<Style>Solid</Style>
+												</Border>
+											</Style>
+										</Textbox>
+									</CellContents>
+								</TablixCell>
+								<TablixCell>
+									<CellContents>
+										<Textbox Name="detOccupancy">
+											<Paragraphs>
+												<Paragraph>
+													<TextRuns>
+														<TextRun>
+															<Value>Percentage of rooms currently occupied</Value>
+														</TextRun>
+													</TextRuns>
+												</Paragraph>
+											</Paragraphs>
+											<Style>
+												<Border>
+													<Color>#000000</Color>
+													<Style>Solid</Style>
+												</Border>
+											</Style>
+										</Textbox>
+									</CellContents>
+								</TablixCell>
+							</TablixCells>
+						</TablixRow>
+
+						<TablixRow>
+							<Height>0.3in</Height>
+							<TablixCells>
+								<TablixCell>
+									<CellContents>
+										<Textbox Name="txtRevenue">
+											<Paragraphs>
+												<Paragraph>
+													<TextRuns>
+														<TextRun>
+															<Value>Revenue Today</Value>
+														</TextRun>
+													</TextRuns>
+												</Paragraph>
+											</Paragraphs>
+											<Style>
+												<Border>
+													<Color>#000000</Color>
+													<Style>Solid</Style>
+												</Border>
+											</Style>
+										</Textbox>
+									</CellContents>
+								</TablixCell>
+								<TablixCell>
+									<CellContents>
+										<Textbox Name="valRevenue">
+											<Paragraphs>
+												<Paragraph>
+													<TextRuns>
+														<TextRun>
+															<Value>=FormatCurrency(Fields!Revenue.Value, 2)</Value>
+														</TextRun>
+													</TextRuns>
+													<Style>
+														<TextAlign>Right</TextAlign>
+													</Style>
+												</Paragraph>
+											</Paragraphs>
+											<Style>
+												<Border>
+													<Color>#000000</Color>
+													<Style>Solid</Style>
+												</Border>
+											</Style>
+										</Textbox>
+									</CellContents>
+								</TablixCell>
+								<TablixCell>
+									<CellContents>
+										<Textbox Name="detRevenue">
+											<Paragraphs>
+												<Paragraph>
+													<TextRuns>
+														<TextRun>
+															<Value>Total payments received today</Value>
+														</TextRun>
+													</TextRuns>
+												</Paragraph>
+											</Paragraphs>
+											<Style>
+												<Border>
+													<Color>#000000</Color>
+													<Style>Solid</Style>
+												</Border>
+											</Style>
+										</Textbox>
+									</CellContents>
+								</TablixCell>
+							</TablixCells>
+						</TablixRow>
+
+						<TablixRow>
+							<Height>0.3in</Height>
+							<TablixCells>
+								<TablixCell>
+									<CellContents>
+										<Textbox Name="txtArrivals">
+											<Paragraphs>
+												<Paragraph>
+													<TextRuns>
+														<TextRun>
+															<Value>Arrivals Today</Value>
+														</TextRun>
+													</TextRuns>
+												</Paragraph>
+											</Paragraphs>
+											<Style>
+												<Border>
+													<Color>#000000</Color>
+													<Style>Solid</Style>
+												</Border>
+											</Style>
+										</Textbox>
+									</CellContents>
+								</TablixCell>
+								<TablixCell>
+									<CellContents>
+										<Textbox Name="valArrivals">
+											<Paragraphs>
+												<Paragraph>
+													<TextRuns>
+														<TextRun>
+															<Value>=Fields!Arrivals.Value</Value>
+														</TextRun>
+													</TextRuns>
+													<Style>
+														<TextAlign>Right</TextAlign>
+													</Style>
+												</Paragraph>
+											</Paragraphs>
+											<Style>
+												<Border>
+													<Color>#000000</Color>
+													<Style>Solid</Style>
+												</Border>
+											</Style>
+										</Textbox>
+									</CellContents>
+								</TablixCell>
+								<TablixCell>
+									<CellContents>
+										<Textbox Name="detArrivals">
+											<Paragraphs>
+												<Paragraph>
+													<TextRuns>
+														<TextRun>
+															<Value>Expected guest check-ins today</Value>
+														</TextRun>
+													</TextRuns>
+												</Paragraph>
+											</Paragraphs>
+											<Style>
+												<Border>
+													<Color>#000000</Color>
+													<Style>Solid</Style>
+												</Border>
+											</Style>
+										</Textbox>
+									</CellContents>
+								</TablixCell>
+							</TablixCells>
+						</TablixRow>
+
+						<TablixRow>
+							<Height>0.3in</Height>
+							<TablixCells>
+								<TablixCell>
+									<CellContents>
+										<Textbox Name="txtDepartures">
+											<Paragraphs>
+												<Paragraph>
+													<TextRuns>
+														<TextRun>
+															<Value>Departures Today</Value>
+														</TextRun>
+													</TextRuns>
+												</Paragraph>
+											</Paragraphs>
+											<Style>
+												<Border>
+													<Color>#000000</Color>
+													<Style>Solid</Style>
+												</Border>
+											</Style>
+										</Textbox>
+									</CellContents>
+								</TablixCell>
+								<TablixCell>
+									<CellContents>
+										<Textbox Name="valDepartures">
+											<Paragraphs>
+												<Paragraph>
+													<TextRuns>
+														<TextRun>
+															<Value>=Fields!Departures.Value</Value>
+														</TextRun>
+													</TextRuns>
+													<Style>
+														<TextAlign>Right</TextAlign>
+													</Style>
+												</Paragraph>
+											</Paragraphs>
+											<Style>
+												<Border>
+													<Color>#000000</Color>
+													<Style>Solid</Style>
+												</Border>
+											</Style>
+										</Textbox>
+									</CellContents>
+								</TablixCell>
+								<TablixCell>
+									<CellContents>
+										<Textbox Name="detDepartures">
+											<Paragraphs>
+												<Paragraph>
+													<TextRuns>
+														<TextRun>
+															<Value>Expected guest check-outs today</Value>
+														</TextRun>
+													</TextRuns>
+												</Paragraph>
+											</Paragraphs>
+											<Style>
+												<Border>
+													<Color>#000000</Color>
+													<Style>Solid</Style>
+												</Border>
+											</Style>
+										</Textbox>
+									</CellContents>
+								</TablixCell>
+							</TablixCells>
+						</TablixRow>
+					</TablixRows>
+				</TablixBody>
+				<TablixColumnHierarchy>
+					<TablixMembers>
+						<TablixMember />
+						<TablixMember />
+						<TablixMember />
+					</TablixMembers>
+				</TablixColumnHierarchy>
+				<TablixRowHierarchy>
+					<TablixMembers>
+						<TablixMember />
+						<TablixMember />
+						<TablixMember />
+						<TablixMember />
+						<TablixMember />
+						<TablixMember />
+						<TablixMember />
+					</TablixMembers>
+				</TablixRowHierarchy>
+				<DataSetName>Summary</DataSetName>
+				<Top>1.2in</Top>
+				<Left>0.5in</Left>
+				<Height>2.5in</Height>
+				<Width>6in</Width>
+			</Tablix>
+		</ReportItems>
+		<Height>5in</Height>
+		<Style />
+	</Body>
+	<Width>7.5in</Width>
+	<Page>
+		<LeftMargin>0.5in</LeftMargin>
+		<RightMargin>0.5in</RightMargin>
+		<TopMargin>0.5in</TopMargin>
+		<BottomMargin>0.5in</BottomMargin>
+		<Style />
+	</Page>
+	<AutoRefresh>0</AutoRefresh>
+	<rd:ReportUnitType>Inch</rd:ReportUnitType>
+</Report>

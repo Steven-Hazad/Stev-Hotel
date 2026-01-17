@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <Folder Include="NewFolder\" />
-    <Folder Include="Reports\" />
     <Folder Include="Services\" />
     <Folder Include="Helpers\" />
   </ItemGroup>
@@ -29,7 +28,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="10.0.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.1" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.1" />
-    <PackageReference Include="Microsoft.ReportingServices.ReportViewerControl.WinForms" Version="150.1652.0" />
+    <PackageReference Include="Microsoft.ReportingServices.ReportViewerControl.WinForms" Version="150.900.148" />
   </ItemGroup>
 
   <ItemGroup>
