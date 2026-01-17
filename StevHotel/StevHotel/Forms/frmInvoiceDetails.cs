@@ -52,9 +52,9 @@ namespace StevHotel.Forms
             dgvPayments.DataSource = _invoice.Payments
                 .Select(p => new
                 {
-                    p.Amount.ToString("N2") + " USD",
+                    V = p.Amount.ToString("N2") + " USD",
                     p.PaymentMethod,
-                    p.PaymentDate.ToShortDateString()
+                    V1 = p.PaymentDate.ToShortDateString()
                 })
                 .ToList();
         }
