@@ -117,5 +117,11 @@ namespace StevHotel.Forms
             var report = new frmDailyReport();
             report.ShowDialog();
         }
+
+        private void cleaningScheduleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var cleaning = new frmCleaningSchedule();
+            cleaning.ShowDialog();
+        }
     }
 }
